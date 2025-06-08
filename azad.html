@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Color Scheme Switcher</title>
+  <style>
+    /* Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      /* Gradient background */
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      transition: background-color 0.5s ease, background-image 0.5s ease;
+      color: #fff;
+    }
+
+    nav {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 30px;
+      margin-bottom: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #e0e0ff;
+    }
+    nav a {
+      color: #e0e0ff;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    nav a:hover,
+    nav a[aria-current="page"] {
+      border-color: #ffda79;
+      color: #ffda79;
+    }
+
+    .canvas {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
+      padding: 50px 40px;
+      text-align: center;
+      color: #fff;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 50px;
+      color: #ddd;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    h2 span {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #bbb;
+      font-weight: 400;
+    }
+
+    .button {
+      width: 130px;
+      height: 130px;
+      margin: 0 20px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.7);
+      background-clip: padding-box;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1), 
+                  box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+                  border-color 0.35s ease;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+    .button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      opacity: 0.25;
+      filter: blur(10px);
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+    #grey {
+      background-color: #7a7a7a;
+      border-color: #a0a0a0;
+    }
+    #grey::before {
+      background-color: #7a7a7a;
+    }
+    #white {
+      background-color: #fefefe;
+      border-color: #cccccc;
+    }
+    #white::before {
+      background-color: #fefefe;
+    }
+    #blue {
+      background-color: #007bff;
+      border-color: #0056b3;
+    }
+    #blue::before {
+      background-color: #007bff;
+    }
+    #yellow {
+      background-color: #ffc107;
+      border-color: #e6ac00;
+    }
+    #yellow::before {
+      background-color: #ffc107;
+    }
+
+    .button:hover {
+      transform: scale(1.15);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      border-color: #ffda79;
+    }
+    .button:hover::before {
+      opacity: 0.45;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" aria-current="page">Home</a>
+    <a target="_blank" href="https://www.youtube.com/@chaiaurcode">Youtube channel</a>
+  </nav>
+
+  <div class="canvas">
+    <h1>Color Scheme Switcher made by Azad Kumar Chaurasia </h1>
+    <span class="button" id="grey" title="Grey"></span>
+    <span class="button" id="white" title="White"></span>
+    <span class="button" id="blue" title="Blue"></span>
+    <span class="button" id="yellow" title="Yellow"></span>
+    <h2>
+      Try clicking on one of the colors above
+      <span>to change the background color of this page!</span>
+    </h2>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.button');
+    const body = document.querySelector('body');
+
+    const colorMap = {
+      grey: '#7a7a7a',
+      white: '#fefefe',
+      blue: '#007bff',
+      yellow: '#ffc107',
+    };
+
+    buttons.forEach(button => {
+      button.addEventListener('click', e => {
+        // Remove gradient background image:
+        body.style.backgroundImage = 'none';
+        // Set solid background color from colorMap:
+        body.style.backgroundColor = colorMap[e.target.id];
+      });
+    });
+  </script>
+</body>
+</html>
